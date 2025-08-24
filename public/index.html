@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>LẤY MÃ Netflix</title>
+  <!-- Font đẹp Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <h2>Nhập email đăng nhập <b>Netflix</b> để lấy mã</h2>
+    <form id="emailForm" class="email-form">
+      <input type="email" id="emailInput" name="email" placeholder="Nhập email của bạn..." required>
+      <button type="submit">Enter</button>
+    </form>
+    <p id="error-msg" class="error-msg" style="display:none;">⚠️ Email không tồn tại</p>
+
+    <div class="box">
+      <h1>🚀 <b>TUYỂN CTV BÁN HÀNG</b></h1>
+      <p>💰 Bán tất cả các mặt hàng hot!</p>
+
+      <p>💥Netflix | Spotify | Canva | ChatGPT | CapCut | Adobe | Duolingo...</p>
+
+      <p>💰 Giá Cực Tốt Cho Reseller</p>
+
+      <p>📅 Tham khảo thêm → <a href="https://bom.so/pRwm3W" target="_blank">Danh Sách Tài Khoản</a></p>
+
+      <blockquote>
+        💥 Cam kết bảo hành trọn gói – lỗi là đổi ngay !!!
+      </blockquote>
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("emailForm");
+    const emailInput = document.getElementById("emailInput");
+    const errorMsg = document.getElementById("error-msg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      errorMsg.style.display = "none";
+
+      const email = emailInput.value;
+
+      try {
+        const response = await fetch("/check", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ email })
+        });
+
+        const result = await response.text();
+
+        if (result.includes("không tồn tại") || result.includes("⚠️")) {
+          errorMsg.style.display = "block";
+        } else {
+          document.body.innerHTML = result;
+        }
+      } catch (err) {
+        errorMsg.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

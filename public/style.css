@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Gradient động */
+  background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d, #21d4fd);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+input[type="email"] {
+  padding: 12px;
+  width: 70%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.error-msg {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.box {
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+}
