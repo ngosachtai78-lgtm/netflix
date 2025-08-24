@@ -10,16 +10,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"))); // phục vụ file tĩnh
 
-// Route xử lý form
+// ✅ Route chính → load index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// ✅ Route xử lý form check email
 app.post("/check", async (req, res) => {
   const { email } = req.body;
   try {
-    const response = await axios.post("https://vivarocky.in",
+    const response = await axios.post(
+      "https://vivarocky.in",
       new URLSearchParams({ recipient_email: email }).toString(),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     );
+
     res.send(`
       <html>
         <head>
@@ -42,7 +49,7 @@ app.post("/check", async (req, res) => {
       </html>
     `);
   } catch (err) {
-    res.send("⚠️ Email không tồn tại hoặc server vivarocky.in đang lỗi.");
+    res.send("⚠️ Không thể lấy dữ liệu. Có thể vivarocky.in đang lỗi.");
   }
 });
 
